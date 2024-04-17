@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geospace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="{{url_for('first_page')}}" class="logo">🌍Terrascribe.ai</a>
+      <br />
+      <hr />
+
+      <div class="menu-content">
+        <ul class="menu-items">
+          <li class="item">
+            <a
+              href="{{ url_for('home') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px"
+                >Chat with Terrascribe</span
+              >
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <li class="item">
+            <a
+              href="{{ url_for('get_maps') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px"
+                >View our Maps</span
+              >
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <li class="item">
+            <a
+              href="{{ url_for('about_us') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px">About Us</span>
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <button class="other-button" onclick="logout()">Logout</button>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar">
+      <i class="fa-solid fa-bars" id="sidebar-close"></i>
+      <div class="navbar-text">
+        Terrascribe.ai - Explore Earth's Stories with NLP
+      </div>
+      <div class="profile-pic">
+        <img
+          src="{{ url_for('static', filename='images/pfp.jpg') }}"
+          alt=""
+          class="profile-pic"
+        />
+      </div>
+    </nav>
+
+    <p class="hidden center">🔷</p>
+
+    <div class="home-container">
+      <h1>
+        <span>Hey, Explorer!</span><br /><lightspan
+          >What would you like to explore today!?</lightspan
+        >
+      </h1>
+    </div>
+    <div class="square-boxes center">
+      <div class="square-box" onclick="sendPostRequest(this)">
+        <div class="star-container">
+          <i class="fas fa-star"></i>
+        </div>
+        <p>
+          Show me nearby areas with dormant land suitable for studying plant
+          life.
+        </p>
+      </div>
+      <div class="square-box" onclick="sendPostRequest(this)">
+        <div class="star-container">
+          <i class="fas fa-star"></i>
+        </div>
+        <p>
+          Where can I see different types of fruit trees, like apple orchards
+          and orange orchards?
+        </p>
+      </div>
+      <div class="square-box" onclick="sendPostRequest(this)">
+        <div class="star-container">
+          <i class="fas fa-star"></i>
+        </div>
+        <p>
+          I'm interested in visiting a place with a network of streams ideal for
+          fly fishing or trout fishing.
+        </p>
+      </div>
+      <div class="square-box" onclick="sendPostRequest(this)">
+        <div class="star-container">
+          <i class="fas fa-star"></i>
+        </div>
+        <p>
+          Locate regions where mangrove rehabilitation efforts are restoring
+          degraded habitats.
+        </p>
+      </div>
+    </div>
+
+    <div class="search-container">
+      <div class="responserContainer">
+        <div class="response-list">
+          {% for item in response_data %}
+          <div class="response-block">
+            <p><strong>User Query :</strong> {{ item.user_query }}</p>
+            <p><strong>Label Detected:</strong> {{ item.label }}</p>
+            <p>
+              <strong>Link to Map:</strong>
+              <a href="{{url_for(item.map_link)}}" target="_blank"
+                >{{ item.map_link }}</a
+              >
+            </p>
+          </div>
+          <hr class="response-divider" />
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="topicInput"
+          placeholder="enter your prompt here"
+        />
+        <img
+          src="{{ url_for('static', filename='images/mic.png') }}"
+          alt="Search"
+          class="search-icon"
+        />
+        <img
+          src="{{ url_for('static', filename='images/enter.png') }}"
+          alt="Voice Search"
+          class="voice-icon"
+        />
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.querySelector(".sidebar");
+      const sidebarClose = document.querySelector("#sidebar-close");
+      const menu = document.querySelector(".menu-content");
+      const menuItems = document.querySelectorAll(".submenu-item");
+      const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+
+      sidebarClose.addEventListener("click", () =>
+        sidebar.classList.toggle("close")
+      );
+
+      menuItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          menu.classList.add("submenu-active");
+          item.classList.add("show-submenu");
+          menuItems.forEach((item2, index2) => {
+            if (index !== index2) {
+              item2.classList.remove("show-submenu");
+            }
+          });
+        });
+      });
+
+      subMenuTitles.forEach((title) => {
+        title.addEventListener("click", () => {
+          menu.classList.remove("submenu-active");
+        });
+      });
+
+      function sendPostRequest(element) {
+        const topic = element.querySelector("p").textContent.trim();
+        fetch(window.location.href, {
+          method: "POST",
+          body: JSON.stringify({ topic }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then(() => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
+        });
+      }
+      const topicInput = document.getElementById("topicInput");
+      const responseContainer = document.getElementById("responseContainer"); // Assuming you have a container with id "responseContainer"
+
+      topicInput.addEventListener("keydown", async (event) => {
+        if (event.key === "Enter") {
+          const topic = topicInput.value;
+          topicInput.value = "";
+          fetch(window.location.href, {
+            method: "POST",
+            body: JSON.stringify({ topic }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(() => {
+            setTimeout(() => {
+              window.location.reload();
+            }, 5000);
+          });
+        }
+      });
+      function logout() {
+        // Replace 'logout_url' with the URL you want to redirect to
+        window.location.href = "{{ url_for('first_page')}}";
+      }
+    </script>
+  </body>
+</html>

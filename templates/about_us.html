@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geospace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="{{url_for('home')}}" class="logo">🌍Terrascribe.ai</a>
+      <br />
+      <hr />
+
+      <div class="menu-content">
+        <ul class="menu-items">
+          <li class="item">
+            <a
+              href="{{ url_for('home') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px"
+                >Chat with Terrascribe</span
+              >
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <li class="item">
+            <a
+              href="{{ url_for('get_maps') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px"
+                >View our Maps</span
+              >
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <li class="item">
+            <a
+              href="{{ url_for('about_us') }}"
+              style="display: flex; align-items: center"
+            >
+              <span style="flex-grow: 1; margin-right: 10px">About Us</span>
+              <i class="fa-solid fa-chevron-right" style="font-size: 0.8em"></i>
+            </a>
+          </li>
+          <button class="other-button" onclick="logout()">Logout</button>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar">
+      <i class="fa-solid fa-bars" id="sidebar-close"></i>
+      <div class="navbar-text">
+        Terrascribe.ai - Explore Earth's Stories with NLP
+      </div>
+      <div class="profile-pic">
+        <img
+          src="{{ url_for('static', filename='images/pfp.jpg') }}"
+          alt=""
+          class="profile-pic"
+        />
+      </div>
+    </nav>
+
+    <p class="hidden center">🔷</p>
+
+    <div class="home-container">
+      <h1>
+        <span>About Us!</span><br /><lightspan
+          >Learn more about the project here!</lightspan
+        >
+      </h1>
+      <br />
+      <div style="align-items: left; margin-left: 19%">
+        <hr />
+        <br />
+        <h2><span>Project Abstract</span></h2>
+        <br />
+        <p style="line-height: 160%">
+          This project aims to develop an online platform for geospatial data
+          interaction, introducing natural language scripting to enhance
+          functionality. The platform simplifies geospatial exploration through
+          text-based queries, making mapping and analysis tasks straightforward.
+          Utilizing the dataset, our project pinpoints locations on a map
+          through color-coding aligned with thematic layers like land use,
+          crops, land status, and natural features. Anticipated outcomes include
+          a functional online platform that interprets user queries, and
+          provides visual representations on the map based on thematic layer
+          matches. Evaluation criteria cover functionality, accuracy in natural
+          language processing, performance metrics, and innovation. The project
+          aims to offer a practical and efficient tool for geospatial analysis,
+          meeting the needs of users involved in data-driven decision-making
+          processes.
+        </p>
+        <br />
+        <hr />
+        <br />
+        <h2><span>Working Architecture</span></h2>
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/working_arch.png') }}"
+            alt=""
+            width="800px"
+          />
+        </div>
+        <br />
+        <hr />
+        <br />
+        <h2><span>Credits and Team members</span></h2>
+        <br />
+        <p>
+          This project was completed for Avocado Creative Solutions Pvt Ltd. as
+          a part of the Innovation Practices Laboratory at PSG College of
+          Technology, Coimbatore.
+        </p>
+        <br />
+        <p>This project was guided by :</p>
+        <ul style="margin-left: 20px">
+          <li>Mr. Ramesh A C, Assistant Professor, PSGCT.</li>
+          <li>
+            Mr. Vignesh Karthikeyan R, Director, Avocado Creative Solutions.
+          </li>
+        </ul>
+        <br />
+        <p>The team :</p>
+        <ul style="margin-left: 20px">
+          <li>Akshayakumar N G</li>
+          <li>Ashwant Krishna R</li>
+          <li>Praveen Krishna G</li>
+          <li>Vishal R</li>
+          <li>Venkatprasadh Mari</li>
+        </ul>
+        <br />
+        <hr />
+        <br />
+      </div>
+    </div>
+    <script>
+      function logout() {
+        // Replace 'logout_url' with the URL you want to redirect to
+        window.location.href = "{{ url_for('first_page')}}";
+      }
+    </script>
+  </body>
+</html>

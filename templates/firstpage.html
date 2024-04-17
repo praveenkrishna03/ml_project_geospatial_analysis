@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Terrascribe.ai </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/firstpage.css') }}" />
+   </head>
+<body>
+
+  <nav>
+
+  </nav>
+  <div class="downnav">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Your Image">
+  </div>
+
+  <div class="light-text">
+
+    <button class="small-button" onclick="redirectToChat()">Chat with Terrascribe</button>
+
+  </div>
+
+  <div class="card">
+    <div class="img-wrapper">
+      <img class="img active" src="{{ url_for('static', filename='images/1.jpeg') }}" alt="Image 1" />
+      <img class="img" src="{{ url_for('static', filename='images/2.avif') }}" alt="Image 2" />
+      <img class="img" src="{{ url_for('static', filename='images/3.jpeg') }}" alt="Image 3" />
+      <img class="img" src="{{ url_for('static', filename='images/4.jpeg') }}" alt="Image 4" />
+      <img class="img" src="{{ url_for('static', filename='images/5.jpeg') }}" alt="Image 5" />
+      <img class="img" src="{{ url_for('static', filename='images/6.avif') }}" alt="Image 6" />
+      <img class="img" src="{{ url_for('static', filename='images/7.jpeg') }}" alt="Image 7" />
+      <img class="img" src="{{ url_for('static', filename='images/8.jpeg') }}" alt="Image 8" />
+      <!-- Add more images as needed -->
+    </div>
+  </div>
+  
+
+  <button class="prev-btn"><img src="{{ url_for('static', filename='images/left.png') }}" alt="Previous Image"></button>
+ <div class="rightbutton">
+    <button class="next-btn"><img src="{{ url_for('static', filename='images/right.png') }}" alt="Next Image"></button>
+  </div>
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2024 Terrascribe.ai</p>
+  </div>
+</footer>
+</body>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script>
+  // timeline for border animation
+  let tl = gsap.timeline({default: {duration: 3}});
+  tl.to('.card', {borderTopColor: '#bad', delay: 0.3})
+    .to('.card', {borderRightColor: '#bad'}, '-=0.2')
+    .to('.card', {borderBottomColor: '#bad'}, '-=0.2')
+    .to('.card', {borderLeftColor: '#bad'}, '-=0.2');
+
+  // animation for img-wrapper 
+  gsap.fromTo('.img-wrapper', {height: 0, backgroundColor: 'transparent'}, {delay: 1, duration: 1, height: '500px', backgroundColor: '#bad'});
+
+  // animation cat
+  gsap.to('.img', {delay: 2, duration: 0.5, opacity: 1});
+  document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll(".img");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+  
+    let currentIndex = 0;
+  
+    function showImage(index) {
+      images.forEach((image, idx) => {
+        if (idx === index) {
+          image.classList.add("active");
+        } else {
+          image.classList.remove("active");
+        }
+      });
+    }
+  
+    function animateImage() {
+      // Remove "active" class from all images
+      images.forEach((image) => {
+        image.classList.remove("active");
+      });
+  
+      // Animation for individual image
+      images[currentIndex].classList.add("active");
+      gsap.fromTo(images[currentIndex].parentElement, {height: 0, backgroundColor: 'transparent'}, {duration: 1, height: '500px', backgroundColor: '#bad'});
+      gsap.to(images[currentIndex], {delay: 0.5, duration: 0.5, opacity: 1});
+    }
+  
+    prevBtn.addEventListener("click", function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      animateImage();
+    });
+  
+    nextBtn.addEventListener("click", function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      animateImage();
+    });
+  
+    // Initially show only the first image
+    showImage(currentIndex);
+  });
+  function redirectToChat() {
+    // Replace 'chat_url' with the URL you want to redirect to
+    window.location.href = 'login_or_signup';
+  }
+  </script>
+</body>
+</html>
