@@ -1,9 +1,10 @@
 # Empowering Geospatial Analysis
-<div style="width: 300px; height: 200px; overflow: hidden;">
-  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/home.png" alt="Image" style="width: 100%; height: auto;">
-  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/chat.png" alt="Image" style="width: 100%; height: auto;">
-  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/map.png" alt="Image" style="width: 100%; height: auto;">
-
+<div>
+  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/home.png" alt="Image" style="width: 100%; height: auto; display: block;">
+  <div style="display: flex;">
+    <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/chat.png" alt="Image" style="width: 50%; height: auto;">
+    <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/map.png" alt="Image" style="width: 50%; height: auto;">
+  </div>
 </div>
 
 ## Abstract of the project
