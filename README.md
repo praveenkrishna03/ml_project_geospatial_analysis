@@ -7,4 +7,4 @@ informed decisions based on geospatial data analysis.
 python main.py
 
 ## Drive Link for Video Demonstration
-![Demo](https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/Demo%20Video/ML_Lab_Video_Demo.mp4)
+https://drive.google.com/file/d/1x6kpEuUbYYrd8qAMWhH9yK0cC6yGc4E5/view?pli=1
