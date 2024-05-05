@@ -1,6 +1,9 @@
 # Empowering Geospatial Analysis
 <div style="width: 300px; height: 200px; overflow: hidden;">
   <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/home.png" alt="Image" style="width: 100%; height: auto;">
+  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/chat.png" alt="Image" style="width: 100%; height: auto;">
+  <img src="https://github.com/praveenkrishna03/ml_project_geospatial_analysis/blob/main/map.png" alt="Image" style="width: 100%; height: auto;">
+
 </div>
 
 ## Abstract of the project
